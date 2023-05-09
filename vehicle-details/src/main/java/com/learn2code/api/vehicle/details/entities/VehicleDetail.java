@@ -1,6 +1,8 @@
 package com.learn2code.api.vehicle.details.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,8 +20,11 @@ public class VehicleDetail {
 
     @Column(name = "model_year")
     private String modelYear;
+    @NotBlank(message = "* Brand name is required")
     @Column(name = "brand_name")
     private String brandName;
+    @NotBlank(message = "* Model name is required")
+    @Size(min = 3, max = 15, message = "Model name should be between 3-15 characters")
     @Column(name = "model_name")
     private String modelName;
     @Column(name = "trim_type")
