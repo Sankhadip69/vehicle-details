@@ -38,4 +38,14 @@ public class VehicleDetailsExceptionHandler {
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.EXPECTATION_FAILED);
     }
+
+    @ExceptionHandler(VehicleDetailsNotFound.class)
+    public ResponseEntity<ErrorResponse> handleVehicleDetailsNotFound(VehicleDetailsNotFound ex) {
+
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.NOT_FOUND,
+                Arrays.asList(ex.getMessage())
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
 }
