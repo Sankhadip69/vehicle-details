@@ -2,6 +2,7 @@ package com.learn2code.api.vehicle.details.controller;
 
 import com.learn2code.api.vehicle.details.exception.MandatoryFieldsMissingException;
 import com.learn2code.api.vehicle.details.payload.VehicleDetailDto;
+import com.learn2code.api.vehicle.details.payload.VehicleDetailPayLoad;
 import com.learn2code.api.vehicle.details.service.VehicleDetailService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -36,8 +37,9 @@ public class VehicleDetailController {
     }
     
     @GetMapping
-    public List<VehicleDetailDto> getAllVehicleDetails() {
-        return vehicleDetailService.fetchAllVehicleDetails();
+    public VehicleDetailPayLoad getAllVehicleDetails() {
+       List<VehicleDetailDto> savedVehicles = vehicleDetailService.fetchAllVehicleDetails();
+       return new VehicleDetailPayLoad(savedVehicles);
     }
 
 }
