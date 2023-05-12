@@ -51,4 +51,12 @@ public class VehicleDetailServiceImpl implements VehicleDetailService {
         }
         return vehicleDetailMapper.mapToVehicheDetailDto(optionalVehicleDetails.get());
     }
+
+    @Override
+    public void deleteVehicleDetailsById(int vehicleId) {
+        VehicleDetail vehicleDetail = vehicleDetailRepository.findById(vehicleId).orElseThrow(
+                () -> new VehicleDetailsNotFound("No vehicle details found in database for vehicle ID- "+vehicleId)
+        );
+        vehicleDetailRepository.deleteById(vehicleId);
+    }
 }

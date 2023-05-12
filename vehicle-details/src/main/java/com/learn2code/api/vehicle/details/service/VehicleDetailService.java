@@ -11,4 +11,6 @@ public interface VehicleDetailService {
     List<VehicleDetailDto> fetchAllVehicleDetails();
 
     VehicleDetailDto getVehicleById(int vehicleId);
+
+    void  deleteVehicleDetailsById(int vehicleId);
 }
