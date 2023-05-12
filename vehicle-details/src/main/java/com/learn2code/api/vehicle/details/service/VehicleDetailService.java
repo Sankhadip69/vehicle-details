@@ -13,4 +13,6 @@ public interface VehicleDetailService {
     VehicleDetailDto getVehicleById(int vehicleId);
 
     void  deleteVehicleDetailsById(int vehicleId);
+
+    VehicleDetailDto updateVehicleDetails(VehicleDetailDto vehicleDetailDto, int vehicleId);
 }
