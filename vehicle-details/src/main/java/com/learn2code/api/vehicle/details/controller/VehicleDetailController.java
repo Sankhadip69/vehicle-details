@@ -46,4 +46,10 @@ public class VehicleDetailController {
     public VehicleDetailDto getVehicleDetailById(@PathVariable int vehicleId) {
         return vehicleDetailService.getVehicleById(vehicleId);
     }
+
+    @DeleteMapping("/{vehicleId}")
+    public ResponseEntity<String> deleteVehicleDetailsById(@PathVariable int vehicleId) {
+        vehicleDetailService.deleteVehicleDetailsById(vehicleId);
+        return new ResponseEntity<>("Vehicle details deleted successfully with ID- "+vehicleId,HttpStatus.OK);
+    }
 }
