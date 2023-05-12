@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,5 +41,14 @@ public class VehicleDetailServiceImpl implements VehicleDetailService {
             throw new VehicleDetailsNotFound("No vehicle details found in Database!");
         }
         return dbVehicleDetails.stream().map(vehicleDetailMapper::mapToVehicheDetailDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public VehicleDetailDto getVehicleById(int vehicleId) {
+        Optional<VehicleDetail> optionalVehicleDetails = vehicleDetailRepository.findById(vehicleId);
+        if(!optionalVehicleDetails.isPresent()) {
+            throw new VehicleDetailsNotFound("No vehicle details found in database for vehicle ID- "+vehicleId);
+        }
+        return vehicleDetailMapper.mapToVehicheDetailDto(optionalVehicleDetails.get());
     }
 }

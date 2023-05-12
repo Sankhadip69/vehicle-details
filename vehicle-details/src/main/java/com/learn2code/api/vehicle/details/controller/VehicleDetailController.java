@@ -42,4 +42,8 @@ public class VehicleDetailController {
        return new VehicleDetailPayLoad(savedVehicles);
     }
 
+    @GetMapping("/{vehicleId}")
+    public VehicleDetailDto getVehicleDetailById(@PathVariable int vehicleId) {
+        return vehicleDetailService.getVehicleById(vehicleId);
+    }
 }
