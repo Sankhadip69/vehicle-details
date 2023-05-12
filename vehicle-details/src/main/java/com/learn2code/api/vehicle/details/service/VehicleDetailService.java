@@ -9,4 +9,6 @@ public interface VehicleDetailService {
     VehicleDetailDto saveVehicleDetails(VehicleDetailDto vehicleDetailDto);
 
     List<VehicleDetailDto> fetchAllVehicleDetails();
+
+    VehicleDetailDto getVehicleById(int vehicleId);
 }
