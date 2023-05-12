@@ -52,4 +52,13 @@ public class VehicleDetailController {
         vehicleDetailService.deleteVehicleDetailsById(vehicleId);
         return new ResponseEntity<>("Vehicle details deleted successfully with ID- "+vehicleId,HttpStatus.OK);
     }
+
+    @PutMapping("/{vehicleId}")
+    public ResponseEntity<VehicleDetailDto> updateVehicleById(@RequestBody VehicleDetailDto vehicleDetailDto,
+                                                              @PathVariable int vehicleId) {
+        VehicleDetailDto savedVehicle =
+                vehicleDetailService.updateVehicleDetails(vehicleDetailDto, vehicleId);
+        return ResponseEntity.status(HttpStatus.OK).body(savedVehicle);
+
+    }
 }
