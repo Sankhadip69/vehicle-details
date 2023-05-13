@@ -64,11 +64,17 @@ public class VehicleDetailController {
 
     @GetMapping("/search")
     public VehicleDetailPayLoad getVehiclesByCriteria(@RequestParam String modelYear,
-                                                        @RequestParam String brandName,
-                                                        @RequestParam String modelName,
-                                                        @RequestParam String trimType,
-                                                        @RequestParam double price) {
+                                                      @RequestParam String brandName,
+                                                      @RequestParam String modelName,
+                                                      @RequestParam String trimType,
+                                                      @RequestParam Double price) {
+
+        if(price == null || price == 0.0) {
+            price = 0.0;
+        }
+
         List<VehicleDetailDto> savedVehicles = vehicleDetailService.fetchFilteredVehicleDetails(modelYear, brandName, modelName, trimType, price);
         return new VehicleDetailPayLoad(savedVehicles);
     }
+
 }
