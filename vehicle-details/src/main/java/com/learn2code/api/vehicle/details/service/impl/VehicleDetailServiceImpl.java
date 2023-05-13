@@ -106,13 +106,27 @@ public class VehicleDetailServiceImpl implements VehicleDetailService {
     public List<VehicleDetailDto> fetchFilteredVehicleDetails(String modelYear, String brandName,
                                                               String modelName, String trimType,
                                                               double price) {
-        if(modelYear != "" && brandName != "" && modelName != "" && trimType != "" && price > 0.0) {
+        List<VehicleDetail> vehicleDetails = null;
+        if (modelYear != "" && brandName != "" && modelName != "" && trimType != "" && price > 0.0) {
 
-            List<VehicleDetail> vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(modelYear, brandName, modelName, trimType, price);
-            return vehicleDetails.stream()
-                    .map(vehicleDetailMapper::mapToVehicheDetailDto).collect(Collectors.toList());
+            vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(modelYear, brandName, modelName, trimType, price);
+        } else if (brandName != "" && modelName != "" && trimType != "" && price > 0.0) {
+            vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(brandName, modelName, trimType, price);
+        } else if (brandName != "" && modelName != "" && trimType != "") {
+            vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(brandName, modelName, trimType);
+        } else if (brandName != "" && modelName != "" && price > 0.0) {
+            vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(brandName, modelName, price);
+        } else if (brandName != "" && price > 0.0) {
+            vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(brandName, price);
+        } else if (brandName != "") {
+            vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(brandName);
+        } else if (price >= 0.0) {
+            vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(price);
         }
-        return null;
 
+        return vehicleDetails.stream()
+                .map(vehicleDetailMapper::mapToVehicheDetailDto).collect(Collectors.toList());
     }
+
+
 }
