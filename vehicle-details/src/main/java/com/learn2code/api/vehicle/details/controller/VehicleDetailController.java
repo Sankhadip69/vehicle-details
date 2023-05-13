@@ -61,4 +61,14 @@ public class VehicleDetailController {
         return ResponseEntity.status(HttpStatus.OK).body(savedVehicle);
 
     }
+
+    @GetMapping("/search")
+    public VehicleDetailPayLoad getVehiclesByCriteria(@RequestParam String modelYear,
+                                                        @RequestParam String brandName,
+                                                        @RequestParam String modelName,
+                                                        @RequestParam String trimType,
+                                                        @RequestParam double price) {
+        List<VehicleDetailDto> savedVehicles = vehicleDetailService.fetchFilteredVehicleDetails(modelYear, brandName, modelName, trimType, price);
+        return new VehicleDetailPayLoad(savedVehicles);
+    }
 }
