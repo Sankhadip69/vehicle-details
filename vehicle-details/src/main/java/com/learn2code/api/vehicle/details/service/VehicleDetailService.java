@@ -15,4 +15,8 @@ public interface VehicleDetailService {
     void  deleteVehicleDetailsById(int vehicleId);
 
     VehicleDetailDto updateVehicleDetails(VehicleDetailDto vehicleDetailDto, int vehicleId);
+
+    List<VehicleDetailDto> fetchFilteredVehicleDetails(String modelYear, String brandName,
+                                                       String modelName, String trimType,
+                                                       double price);
 }

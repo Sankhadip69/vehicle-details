@@ -101,4 +101,18 @@ public class VehicleDetailServiceImpl implements VehicleDetailService {
         return vehicleDetailMapper
                 .mapToVehicheDetailDto(vehicleDetailRepository.save(vehicleDetail));
     }
+
+    @Override
+    public List<VehicleDetailDto> fetchFilteredVehicleDetails(String modelYear, String brandName,
+                                                              String modelName, String trimType,
+                                                              double price) {
+        if(modelYear != "" && brandName != "" && modelName != "" && trimType != "" && price > 0.0) {
+
+            List<VehicleDetail> vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(modelYear, brandName, modelName, trimType, price);
+            return vehicleDetails.stream()
+                    .map(vehicleDetailMapper::mapToVehicheDetailDto).collect(Collectors.toList());
+        }
+        return null;
+
+    }
 }
