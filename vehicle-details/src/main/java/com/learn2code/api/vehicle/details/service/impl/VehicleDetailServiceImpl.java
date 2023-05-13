@@ -110,17 +110,27 @@ public class VehicleDetailServiceImpl implements VehicleDetailService {
         if (modelYear != "" && brandName != "" && modelName != "" && trimType != "" && price > 0.0) {
 
             vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(modelYear, brandName, modelName, trimType, price);
+        }else if (modelYear != "" && brandName != "" && modelName != "" && trimType != "" ) {
+                vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(modelYear,brandName, modelName, trimType);
+        }else if (modelYear != "" && brandName != "" && modelName != "" && price > 0.0 ) {
+            vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria1(modelYear, brandName, modelName, price);
+        } else if (modelYear != "" && brandName != "" && price > 0.0 ) {
+            vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria2(modelYear,brandName,price);
         } else if (brandName != "" && modelName != "" && trimType != "" && price > 0.0) {
             vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(brandName, modelName, trimType, price);
         } else if (brandName != "" && modelName != "" && trimType != "") {
             vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(brandName, modelName, trimType);
         } else if (brandName != "" && modelName != "" && price > 0.0) {
             vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(brandName, modelName, price);
+        } else if (modelYear != "" && price > 0.0) {
+            vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria3(modelYear,price);
         } else if (brandName != "" && price > 0.0) {
             vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(brandName, price);
         } else if (brandName != "") {
             vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(brandName);
-        } else if (price >= 0.0) {
+        } else if (modelYear != "") {
+            vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria4(modelYear);
+        } else if (price > 0.0) {
             vehicleDetails = vehicleDetailRepository.filterVehicleBasedOnCriteria(price);
         }
 
