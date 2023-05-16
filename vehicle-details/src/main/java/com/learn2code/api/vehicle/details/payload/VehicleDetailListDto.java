@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class VehicleDetailPayLoad {
+public class VehicleDetailListDto {
 
     List<VehicleDetailDto> vehicleDetailsList;
 }
