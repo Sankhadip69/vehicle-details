@@ -39,7 +39,7 @@ public class VehicleDetailServiceImpl implements VehicleDetailService {
     @Override
     public List<VehicleDetailDto> fetchAllVehicleDetails() {
         List<VehicleDetail> dbVehicleDetails = vehicleDetailRepository.findAll();
-        if (dbVehicleDetails.isEmpty()) {
+        if (dbVehicleDetails.isEmpty()) { /* (dbVehicleDetails.size()==0*/
             throw new VehicleDetailsNotFound("No vehicle details found in Database!");
         }
         return dbVehicleDetails.stream().map(vehicleDetailMapper::mapToVehicheDetailDto).collect(Collectors.toList());

@@ -2,7 +2,7 @@ package com.learn2code.api.vehicle.details.controller;
 
 import com.learn2code.api.vehicle.details.exception.MandatoryFieldsMissingException;
 import com.learn2code.api.vehicle.details.payload.VehicleDetailDto;
-import com.learn2code.api.vehicle.details.payload.VehicleDetailPayLoad;
+import com.learn2code.api.vehicle.details.payload.VehicleDetailListDto;
 import com.learn2code.api.vehicle.details.service.VehicleDetailService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -37,9 +37,9 @@ public class VehicleDetailController {
     }
     
     @GetMapping
-    public VehicleDetailPayLoad getAllVehicleDetails() {
+    public VehicleDetailListDto getAllVehicleDetails() {
        List<VehicleDetailDto> savedVehicles = vehicleDetailService.fetchAllVehicleDetails();
-       return new VehicleDetailPayLoad(savedVehicles);
+       return new VehicleDetailListDto(savedVehicles);
     }
 
     @GetMapping("/{vehicleId}")
@@ -63,7 +63,7 @@ public class VehicleDetailController {
     }
 
     @GetMapping("/search")
-    public VehicleDetailPayLoad getVehiclesByCriteria(@RequestParam String modelYear,
+    public VehicleDetailListDto getVehiclesByCriteria(@RequestParam String modelYear,
                                                       @RequestParam String brandName,
                                                       @RequestParam String modelName,
                                                       @RequestParam String trimType,
@@ -74,7 +74,7 @@ public class VehicleDetailController {
         }
 
         List<VehicleDetailDto> savedVehicles = vehicleDetailService.fetchFilteredVehicleDetails(modelYear, brandName, modelName, trimType, price);
-        return new VehicleDetailPayLoad(savedVehicles);
+        return new VehicleDetailListDto(savedVehicles);
     }
 
 }
